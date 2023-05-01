@@ -6,3 +6,63 @@ Implicit values in a function when invoked
         * arguments[0], arguments[1].....
         
     - this
+
+It DOES NOT matter where a function is OR it DOES NOT matter who owns a function
+    What matters is HOW the function is invoked
+
+Functions are objects
+
+    1.Creation (function statement)
+    function fn(){
+
+    }
+
+
+    2.Creation (function expression)
+    var fn = function(){}
+
+
+    3.Functions can have attributes (like objects)
+    fn['id']= 100
+    fn.id
+    
+    4.Functions can have methods (like objects)
+    fn['print'] = function(){
+        console.log('i am a function');
+    }
+    fn.print()
+
+    5.Builtin methods of functions
+        - apply()
+        - bind()
+        - call()
+
+Function Invocation Patterns
+    1. As a method of an object (obj)
+        this => obj
+
+
+    2. As a function
+        this => global scope (window)
+
+    3. Using the 'call' method of the function
+        var emp = {
+            name : 'Magesh'
+        }
+        function greet(salutation, message){
+            console.log(salutation + this.name + ', ' + message)
+        }
+        greet.call(emp, 'Mr.', 'Have a nice day!')
+
+    4. Using the 'apply' method of the function
+        var emp = {
+            name : 'Magesh'
+        }
+        function greet(salutation, message){
+            console.log(salutation + this.name + ', ' + message)
+        }
+        greet.call(emp, ['Mr.', 'Have a nice day!'])
+        
+    5. As an 'Immediately Invoked Function Expression' (IIFE)
+    6. Using the 'new' keyword
+

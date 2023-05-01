@@ -1,0 +1,79 @@
+Magesh Kuppan
+
+Schedule:
+    Session-01  : 1:30 hrs
+    Tea Break   : 20 mins
+    Session-02  : 1:30 hrs
+    Lunch Break : 1:00 hr
+    Session-03  : 1:30 hrs
+    Tea Break   : 20 mins
+    Session-04  : 1:30 hrs
+
+Methodology:
+    - No Powerpoints
+    - 100% code driven
+
+Repository:
+    - https://github.com/tkmagesh/salesforce-advjs-may-2023
+
+About You:
+    - Name
+    - Primary skillset
+    - Experience in JS
+    - Any specific topics in JS that you are very much interested
+
+Software Requirements:
+    1. Visual Studio Code
+    2. Node.js
+    3. Chrome Browser
+
+1. Language Features (ES5)
+2. ES6 features
+3. Asynchronous Programming
+4. Testing etc
+
+JavaScript as a language
+    1. Loosely typed
+    2. Dynamic
+    3. Functional
+    4. Object Based
+
+Data Types
+    - string
+    - number
+    - boolean
+    - undefined
+    - object
+    - function
+
+
+function add(x,y){
+    return x + y;
+}
+
+function add(x,y){
+    if (typeof x !== 'number' || typeof y !== 'number'){
+        throw new Error("Invalid arguments")
+    }
+    return x + y;
+}
+
+
+
+add(10,20) //=> 30
+add(10) //=> 10
+add() //=> 0
+add("10",20) //=> 30
+add("abc",20) //=> 20
+add([10,20,30],[40,50,60]) //=>210
+add([10,20,30],[40,50,"60"]) //=>210
+add([10,20,30],[["abc",50,"60"],70])
+add(function(){ return 10; },function(){ return 20; })
+add(function(){ return [10,20,"abc"]; },function(){ return [40,50,"60"]; })
+add([function(){ return [10,20,"abc"]; },function(){ return [40,50,"60"]; }])
+add(function(){ return [function(){ return [10,20,"abc"]; },function(){ return [40,50,"60"]; }];})
+
+$(domNode)
+$([dn1, dn2])
+$(string-selector)
+$(fn)

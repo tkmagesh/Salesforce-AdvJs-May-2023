@@ -51,3 +51,7 @@ var isPrime = memoize(function isPrime(no) {
     }
     return true
 })
+
+// Modify the memoize function in such a way that it can memoize the result of any function with any number of arguments
+// for example, the following should work
+var memoizedAdd = memoize(function (x, y) { return x + y; })

@@ -1,0 +1,7 @@
+Higher Order Functions
+    - Functions can be passed as arguments
+    - Functions can be returned as return values
+
+Pure Functions
+    - Function without any side-effects
+    - The invocation of the function can be replaced with the result of the function without affecting the final outcome

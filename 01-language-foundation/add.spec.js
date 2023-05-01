@@ -58,3 +58,9 @@ test("add([10,'20',30],[40,50,'abc']) //=> 150", function () {
     var actualResult = add([10, '20', 30], [40, 50, 'abc'])
     expect(actualResult).toBe(expectedResult)
 })
+
+test("add([10,20,30],[['abc',50,'60'],70]) //=> 240", function () {
+    var expectedResult = 240
+    var actualResult = add([10, 20, 30], [['abc', 50, '60'], 70])
+    expect(actualResult).toBe(expectedResult)
+})

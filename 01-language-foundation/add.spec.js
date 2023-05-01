@@ -1,6 +1,7 @@
 
 function add(x,y){
     function parseArg(n){
+        if (typeof n === 'function') return parseArg(n())
         if (Array.isArray(n)){
             var result = 0;
             for (var idx = 0; idx < n.length; idx++){
@@ -64,3 +65,31 @@ test("add([10,20,30],[['abc',50,'60'],70]) //=> 240", function () {
     var actualResult = add([10, 20, 30], [['abc', 50, '60'], 70])
     expect(actualResult).toBe(expectedResult)
 })
+
+test('add(function () { return 10; }, function () { return 20; }) //=> 30', function () {
+    var expectedResult = 30;
+    var actualResult = add(function () { return 10; }, function () { return 20; }) 
+    expect(expectedResult).toBe(actualResult)
+})
+
+test('add(function () { return [10, 20, "abc"]; }, function () { return [40, 50, "60"]; }) //=> 180', function () {
+    var expectedResult = 180;
+    var actualResult = add(function () { return [10, 20, "abc"]; }, function () { return [40, 50, "60"]; })
+    expect(expectedResult).toBe(actualResult)
+})
+
+test('add([function () { return [10, 20, "abc"]; }, function () { return [40, 50, "60"]; }]) //=> 180', function () {
+    var expectedResult = 180;
+    var actualResult = add([function () { return [10, 20, "abc"]; }, function () { return [40, 50, "60"]; }])
+    expect(expectedResult).toBe(actualResult)
+})
+
+test('add(function () { return [function () { return [10, 20, "abc"]; }, function () { return [40, 50, "60"]; }]; }) //=> 180', function () {
+    var expectedResult = 180;
+    var actualResult = add(function () { return [function () { return [10, 20, "abc"]; }, function () { return [40, 50, "60"]; }]; }) //=> 180
+    expect(expectedResult).toBe(actualResult)
+})
+
+
+
+

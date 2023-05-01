@@ -1,0 +1,8 @@
+
+Implicit values in a function when invoked
+    - arguments
+        * array like object with all the argument values passed to the function
+        * arguments.length => # of arguments
+        * arguments[0], arguments[1].....
+        
+    - this

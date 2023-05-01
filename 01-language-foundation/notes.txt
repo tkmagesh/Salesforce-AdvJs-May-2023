@@ -41,10 +41,23 @@ Function Invocation Patterns
     1. As a method of an object (obj)
         this => obj
 
+        var emp = {
+            name : 'Magesh',
+            whoAmI : function(){
+                console.log('I am ', this.name);
+            }
+        }
+        emp.whoAmI()
+
+
 
     2. As a function
         this => global scope (window)
+        function fn(){
 
+        }
+        fn()
+        
     3. Using the 'call' method of the function
         var emp = {
             name : 'Magesh'

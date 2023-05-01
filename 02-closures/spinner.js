@@ -1,5 +1,33 @@
 
-var spinner = /* ...... */
+/* 
+var spinner = {
+    counter : 0,
+    up : function(){
+        return ++this.counter;
+    },
+    down: function(){
+        return --this.counter
+    }
+} 
+*/
+
+var spinner = (function(){
+    var counter = 0;
+
+    function up(){
+        return ++counter;
+    }
+
+    function down(){
+        return --counter;
+    }
+
+    return {
+        up : up,
+        down : down
+    }
+})()
+
 
 // the spinner object must have the following methods
 /* 
@@ -13,6 +41,8 @@ var spinner = /* ...... */
     spinner.down() //=> -1
 
     NOTE:
+        NO HTML, NO BUTTON, NO EVENT HANDLERS
+
         there should NOT BE any way by which the outcome of up() and down() methods can be influenced from outside
         For ex:
             The following SHOULD NOT BE possible

@@ -7,6 +7,8 @@ var products = [
     { id: 7, name: 'Mouse', cost: 100, units: 20, category: 'electronics' }
 ];
 
+
+
 function useCase(title, fn){
     console.group(title)
     fn()
@@ -189,5 +191,31 @@ useCase('Filtering', function(){
     })
 })
 
+
+useCase('Grouping', function(){
+    function groupBy(list, keySelector){
+        var result = {}
+        for (var idx = 0; idx < list.length; idx++){
+            var key = keySelector(list[idx])
+            result[key] = result[key] || []
+            result[key].push(list[idx])
+        }
+        return result
+    }
+    useCase('products by category', function(){
+        function categoryKeySelector(product){
+            return product.category
+        }
+        var productsByCategory = groupBy(products, categoryKeySelector)
+        console.log(productsByCategory)
+    })
+    useCase('products by cost', function(){
+        function costKeySelector(product){
+            return product.cost < 50 ? 'affordable' : 'costly'
+        }
+        var productsByCost = groupBy(products, costKeySelector)
+        console.log(productsByCost)
+    })
+})
 
 

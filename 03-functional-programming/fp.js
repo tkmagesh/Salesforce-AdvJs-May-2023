@@ -37,6 +37,13 @@ useCase('Sorting', function(){
 
     useCase('Any list by anything', function(){
 
+        function getDescendingComparer(comparerFn){
+            return function(o1, o2){
+                return comparerFn(o1, o2) * -1;
+            }
+        }
+
+
         function sort(list, comparer){
             if (!comparer && typeof comparer !== 'function' && typeof comparer !== 'string') return list;
             var comparerFn = comparer;
@@ -89,16 +96,27 @@ useCase('Sorting', function(){
                             list[j] = temp
                         }
             }
+            function productComparerByValue(p1, p2) {
+                var p1Value = p1.cost * p1.units,
+                    p2Value = p2.cost * p2.units;
+                if (p1Value < p2Value) return -1;
+                if (p1Value > p2Value) return 1;
+                return 0;
+            }
             useCase('products by value [cost * units]', function () {
-                function productComparerByValue(p1, p2){
-                    var p1Value = p1.cost * p1.units,
-                        p2Value = p2.cost * p2.units;
-                    if (p1Value < p2Value) return -1;
-                    if (p1Value > p2Value) return 1;
-                    return 0;
-                }
                 // sortByComparer(products, productComparerByValue)
                 sort(products, productComparerByValue)
+                console.table(products)
+            })
+            useCase('products by value [cost * units][descending]', function () {
+                // sortByComparer(products, productComparerByValue)
+                /* 
+                var productComparerByValueDesc = function(o1, o2){
+                    return productComparerByValue(o1, o2) * -1
+                } 
+                */
+                var productComparerByValueDesc = getDescendingComparer(productComparerByValue)
+                sort(products, productComparerByValueDesc)
                 console.table(products)
             })
         })

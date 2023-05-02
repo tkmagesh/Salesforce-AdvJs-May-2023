@@ -18,9 +18,7 @@ function useCase(title, fn){
 // sort, filter, group
 // DONOT use the array methods
 
-useCase('Initial List', function(){
-    console.table(products)
-})
+useCase('Initial List', () => console.table(products))
 
 useCase('Sorting', function(){
     useCase('products by id', function(){
@@ -28,9 +26,12 @@ useCase('Sorting', function(){
             for (var i = 0; i < products.length-1; i++)
                 for(var j = i + 1; j < products.length; j++)
                     if (products[i].id > products[j].id){
+                        /* 
                         var temp = products[i];
                         products[i] = products[j]
-                        products[j] = temp
+                        products[j] = temp 
+                        */
+                        [products[i], products[j]] = [products[j], products[i]]
                     }
         }
         sortProductsById()
@@ -39,11 +40,15 @@ useCase('Sorting', function(){
 
     useCase('Any list by anything', function(){
 
+        /* 
         function getDescendingComparer(comparerFn){
             return function(o1, o2){
                 return comparerFn(o1, o2) * -1;
             }
-        }
+        } 
+        */
+        //es6
+        const getDescendingComparer = comparerFn => (o1, o2) => comparerFn(o1, o2) * -1
 
 
         function sort(list, comparer){
@@ -148,11 +153,16 @@ useCase('Filtering', function(){
             }
             return result;
         }
+        /* 
         function negate(predicate, ctx){
             return function(){
                 return !predicate.apply(ctx, arguments)
             }
-        }
+        } 
+        */
+        // const negate = (predicate, ctx) => (...args) => !predicate.apply(ctx, args)
+        const negate = predicate => (...args) => !predicate(...args)
+
         useCase('products by cost', function(){
             function isCostlyProduct(product) {
                 return product.cost > 50

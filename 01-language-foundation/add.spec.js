@@ -20,6 +20,7 @@ function add(x,y){
 } 
 */
 
+/* 
 function add(x, y) {
     function parseArg(n) {
         if (typeof n === 'function') return parseArg(n())
@@ -27,6 +28,17 @@ function add(x, y) {
         return isNaN(n) ? 0 : parseInt(n);
     }
     return arguments.length <= 1 ? parseArg(arguments[0]) : parseArg(arguments[0]) + add.apply(this, [].slice.call(arguments, 1))
+} 
+*/
+
+//es6
+function add(...args) {
+    function parseArg(n) {
+        if (typeof n === 'function') return parseArg(n())
+        if (Array.isArray(n)) return add(...n)
+        return isNaN(n) ? 0 : parseInt(n);
+    }
+    return args.length <= 1 ? parseArg(args[0]) : parseArg(args[0]) + add.apply(this, args.slice(1))
 }
 
 test("add(10,20) => 30", function(){

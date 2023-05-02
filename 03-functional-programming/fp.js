@@ -113,7 +113,7 @@ useCase('Sorting', function(){
                 /* 
                 var productComparerByValueDesc = function(o1, o2){
                     return productComparerByValue(o1, o2) * -1
-                } 
+                }
                 */
                 var productComparerByValueDesc = getDescendingComparer(productComparerByValue)
                 sort(products, productComparerByValueDesc)
@@ -122,25 +122,41 @@ useCase('Sorting', function(){
         })
     })
 
-   /* 
-    useCase('Sort products by id - descending', function(){
-        // sort()
-        console.table(products)
-    }) 
-    */
 })
 
-/* useCase('Filtering', function(){
+useCase('Filtering', function(){
     useCase('stationary products', function(){
-        // filter
-        console.table(products)
+        function filterStationaryProducts(){
+            var result = []
+            for (var idx = 0; idx < products.length; idx++){
+                if (products[idx].category === 'stationary')
+                    result.push(products[idx])
+            }
+            return result;
+        }
+        var stationaryProducts = filterStationaryProducts()
+        console.table(stationaryProducts)
     })
+    useCase('any list by any criteria', function(){
+        function filter(/*  */){
+            /*  */
+        }
+        useCase('costly products [cost > 50]', function(){
+            // filter
+            console.table(products)
+        })
+        useCase('affordable products', function(){
+            /*  */
+        })
 
-    useCase('costly products', function(){
-        // filter
-        console.table(products)
+        useCase('understocked products [units < 50]', function(){
+
+        })
+        useCase('wellstocked products', function(){
+            /*  */
+        })
     })
-}) */
+})
 
 
 

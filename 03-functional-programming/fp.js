@@ -138,22 +138,53 @@ useCase('Filtering', function(){
         console.table(stationaryProducts)
     })
     useCase('any list by any criteria', function(){
-        function filter(/*  */){
-            /*  */
+        function filter(list, predicate){
+            var result = []
+            for (var idx = 0; idx < list.length; idx++) {
+                if (predicate(list[idx]))
+                    result.push(list[idx])
+            }
+            return result;
         }
-        useCase('costly products [cost > 50]', function(){
-            // filter
-            console.table(products)
-        })
-        useCase('affordable products', function(){
-            /*  */
-        })
+        function negate(predicate, ctx){
+            return function(){
+                return !predicate.apply(ctx, arguments)
+            }
+        }
+        useCase('products by cost', function(){
+            function isCostlyProduct(product) {
+                return product.cost > 50
+            }
+            /* 
+            function isAffordableProduct(product){
+                return !isCostlyProduct(product)
+            } 
+            */
 
-        useCase('understocked products [units < 50]', function(){
+            useCase('costly products [cost > 50]', function(){
+                var costlyProducts = filter(products, isCostlyProduct)
+                console.table(costlyProducts)
+            })
+            useCase('affordable products', function(){
+                var isAffordableProduct = negate(isCostlyProduct)
+                var affordableProducts = filter(products, isAffordableProduct)
+                console.table(affordableProducts)
+            })
+        });
 
-        })
-        useCase('wellstocked products', function(){
-            /*  */
+        useCase('products by units', function(){
+            function isUnderstockedProduct(product) {
+                return product.units < 50
+            }
+            useCase('understocked products [units < 50]', function(){
+                var understockedProducts = filter(products, isUnderstockedProduct)
+                console.table(understockedProducts)
+            })
+            useCase('wellstocked products', function(){
+                var isWellstockedProduct = negate(isUnderstockedProduct)
+                var wellstockedProducts = filter(products, isWellstockedProduct)
+                console.table(wellstockedProducts)
+            })
         })
     })
 })

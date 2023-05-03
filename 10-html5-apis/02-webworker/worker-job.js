@@ -8,7 +8,6 @@ function doWork() {
             }
         if (i % 100 === 0){
             const percentCompleted = (i / 10000) * 100
-            console.log(percentCompleted)
             self.postMessage({
                 type : 'progress',
                 percentCompleted

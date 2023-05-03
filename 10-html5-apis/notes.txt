@@ -13,3 +13,6 @@ Storage
     - sessionStorage (transient)
     - indexedDB
         - document store
+
+To start the web server
+    npx http-server -c -1

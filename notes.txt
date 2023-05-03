@@ -77,3 +77,20 @@ $(domNode)
 $([dn1, dn2])
 $(string-selector)
 $(fn)
+
+
+Deployment steps:
+    1. minify all the js files
+    2. uglify all the js files
+    3. bundle the js files
+    4. version the bundled js files
+    5. minify the css files
+    6. bundle the css files
+    7. version the bundled css file
+    8. update the references of the generated js & css file in the index.html
+    9. minify the index.html
+
+ES6 Modules
+    Everything defined in a JS file is considered private by default
+    Any public entity has to be explicitly "exported"
+    To use a public entity from another file, it has to be explicitly "imported"

@@ -23,6 +23,12 @@
       "name": "Test Bug",
       "isClosed": false,
       "createdAt": "2023-02-16T11:59:24.979Z"
+    },
+    {
+      "id": 6,
+      "name": "Server communication failure",
+      "isClosed": false,
+      "createdAt": "2023-05-03T19:40:19.245Z"
     }
   ],
   "projects": [

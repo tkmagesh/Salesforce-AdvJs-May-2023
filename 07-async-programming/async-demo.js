@@ -52,6 +52,8 @@
         }, 5000);
     }
 
+   
+
     function addAsyncClient() {
         console.log(`[@client] invoking the service`)
         addAsync(100, 200, function(result){
@@ -102,12 +104,29 @@
         return p;
     }
 
+    function addSyncClient() {
+        console.log(`[@client] invoking the service`)
+        const result = addSync(100, 200)
+        console.log(`[@client] result = ${result}`)
+    }
+
+    /* 
     function addAsyncPromiseClient(){
         console.log(`[@client] invoking the service`)
         const p = addAsyncPromise(100, 200)
         p.then(function (result) { // callback invoked when the promise is "resolved"
             console.log(`[@client] result = ${result}`)
         })
+    } 
+    */
+
+    //using async await
+    async function addAsyncPromiseClient() {
+        console.log(`[@client] invoking the service`)
+        const result = await addAsyncPromise(100, 200)
+        console.log(`[@client] result = ${result}`)
+        console.log('done')
+        return result * 2;
     }
 
     window['addAsyncPromiseClient'] = addAsyncPromiseClient;
@@ -129,16 +148,29 @@
         return p;
     }
 
+    /* 
     function divideAsyncPromiseClient() {
         console.log(`[@client] invoking the service`)
-        /* 
-        const p = divideAsyncPromise(100, 0)
-        p.then(result => console.log(`[@client] result = ${result}`))
-        p.catch(err => console.log(`[@client] error occurred : ${err}`)) 
-        */
+        
+        // const p = divideAsyncPromise(100, 0)
+        // p.then(result => console.log(`[@client] result = ${result}`))
+        // p.catch(err => console.log(`[@client] error occurred : ${err}`)) 
+        
         divideAsyncPromise(100, 0)
             .then(result => console.log(`[@client] result = ${result}`))
             .catch(err => console.log(`[@client] error occurred : ${err}`))
+    } 
+    */
+
+    //using async await
+    async function divideAsyncPromiseClient() {
+        try {
+            console.log(`[@client] invoking the service`)
+            const result = await divideAsyncPromise(100, 0)
+            console.log(`[@client] result = ${result}`)
+        } catch (err) {
+            console.log(`[@client] error occurred : ${err}`)
+        }
     }
     window['divideAsyncPromiseClient'] = divideAsyncPromiseClient;
 

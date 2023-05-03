@@ -49,7 +49,7 @@
             console.log(`   [@service] returning result`)
             // return result    
             callback(result)
-        });
+        }, 5000);
     }
 
     function addAsyncClient() {
@@ -89,4 +89,28 @@
     }
     window['divideAsyncClient'] = divideAsyncClient;
 
+    function addAsyncPromise(x,y){
+        console.log(`   [@service] processing ${x} and ${y}`)
+
+        const p = new Promise(function(resolveFn, rejectFn){
+            setTimeout(() => {
+                const result = x + y
+                console.log(`   [@service] returning result`)
+                resolveFn(result)
+            }, 5000);
+        })
+        return p;
+    }
+
+    window['addAsyncPromise'] = addAsyncPromise;
+
 })()
+
+//client
+/* 
+console.log(`[@client] invoking the service`)
+const p = addAsyncPromise(100,200)
+p.then(function(result){ // callback invoked when the promise is "resolved"
+    console.log(`[@client] result = ${result}`)
+})
+*/

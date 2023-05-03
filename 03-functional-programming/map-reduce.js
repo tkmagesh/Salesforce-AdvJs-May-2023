@@ -35,3 +35,11 @@ nos.reduce((prevResult, no) => {
 }, 0)
 
 nos.reduce(({ even, odd }, no) => no % 2 === 0 ? { odd, even: even + 1 } : { odd: odd + 1, even }, { even: 0, odd: 0 })
+
+
+//chaining
+products
+    .filter(p => p.category === 'stationary')
+    .map(({ id, name, cost }) => ({ id, name, cost: cost * 0.9 }))
+    .map(dp => `Product Name : ${dp.name}, cost : ${dp.cost}`)
+    .forEach(s => console.log(s))

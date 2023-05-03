@@ -102,7 +102,45 @@
         return p;
     }
 
-    window['addAsyncPromise'] = addAsyncPromise;
+    function addAsyncPromiseClient(){
+        console.log(`[@client] invoking the service`)
+        const p = addAsyncPromise(100, 200)
+        p.then(function (result) { // callback invoked when the promise is "resolved"
+            console.log(`[@client] result = ${result}`)
+        })
+    }
+
+    window['addAsyncPromiseClient'] = addAsyncPromiseClient;
+
+    function divideAsyncPromise(x, y) {
+        console.log(`   [@service] processing ${x} and ${y}`)
+        const p = new Promise(function(resolveFn, rejectFn){
+            setTimeout(() => {
+                if (y === 0) {
+                    // throw new Error('invalid arguments. divisor cannot be 0')
+                    const err = new Error('invalid arguments. divisor cannot be 0')
+                    return rejectFn(err)
+                }
+                const result = x / y
+                console.log(`   [@service] returning result`)
+                resolveFn(result)
+            }, 5000);
+        })
+        return p;
+    }
+
+    function divideAsyncPromiseClient() {
+        console.log(`[@client] invoking the service`)
+        /* 
+        const p = divideAsyncPromise(100, 0)
+        p.then(result => console.log(`[@client] result = ${result}`))
+        p.catch(err => console.log(`[@client] error occurred : ${err}`)) 
+        */
+        divideAsyncPromise(100, 0)
+            .then(result => console.log(`[@client] result = ${result}`))
+            .catch(err => console.log(`[@client] error occurred : ${err}`))
+    }
+    window['divideAsyncPromiseClient'] = divideAsyncPromiseClient;
 
 })()
 
